@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import { FirebaseContext } from '../firebase/encapsule';
 import {Link} from 'react-router-dom';
 
-const Signup = () => {
+const Signup = (props) => {
 
     const firebase = useContext(FirebaseContext);
 
@@ -32,7 +32,8 @@ const Signup = () => {
         // ...on gère la réponse
         // Si les données ont été envoyer alors on revient à l'état initial du state
         .then(user => {
-            setLoginData({...data})
+            setLoginData({...data});
+            props.history.push('/welcome')
         })
         // Si c'est un echec on affiche le message d'erreur et on revient à l'état initial du state
         .catch(error => {
