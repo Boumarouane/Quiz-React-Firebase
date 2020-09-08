@@ -29,7 +29,7 @@ const Signup = (props) => {
         const { email, password, pseudo} = loginData;
         // On accède au context firebase et celle-ci va retourner une réponse donc...
         firebase.signupUser(email, password)
-        // 
+        // On envoi les data dans la BDD pour cela on a besoin de l'user id
         .then(authUser => {
             return firebase.user(authUser.user.uid).set({
                 pseudo,
