@@ -26,12 +26,19 @@ const Signup = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         // Déstructuring pour obtenir les valeurs du state
-        const { email, password} = loginData;
+        const { email, password, pseudo} = loginData;
         // On accède au context firebase et celle-ci va retourner une réponse donc...
         firebase.signupUser(email, password)
+        // 
+        .then(authUser => {
+            return firebase.user(authUser.user.uid).set({
+                pseudo,
+                email
+            })
+        })
         // ...on gère la réponse
         // Si les données ont été envoyer alors on revient à l'état initial du state
-        .then(user => {
+        .then(() => {
             setLoginData({...data});
             props.history.push('/welcome')
         })
