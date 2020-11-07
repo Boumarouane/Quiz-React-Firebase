@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Levels from '../Levels/Levels';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { QuizMarvel } from '../QuizMarvel/QuizMarvel';
+import QuizOver from '../QuizOver/QuizOver'
 
 toast.configure();
 
@@ -21,7 +22,8 @@ class Quiz extends Component {
         btnDisabled: true,
         userAnswer: null,
         score: 0,
-        showWelcomeMsg: false
+        showWelcomeMsg: false,
+        quizEnd: false
     }
     storedDataRef = React.createRef();
 
@@ -46,7 +48,7 @@ class Quiz extends Component {
 
     nextQuestion = () => {
         if (this.state.idQuestion === this.state.maxQuestions -1){
-            // End
+            this.gameOver();
 
         }else{
             this.setState(prevState => ({
@@ -130,6 +132,12 @@ class Quiz extends Component {
         })
     }
 
+    gameOver = () => {
+        this.setState({
+            quizEnd: true
+        })
+    }
+
     render() {
 
         const displayOptions = this.state.options.map((option,index) => {
@@ -144,24 +152,27 @@ class Quiz extends Component {
         })
 
         // const { pseudo } = this.props.userData;
+
+        return this.state.quizEnd ? (
+            <QuizOver/>
+        ) : (
+                <>
+                    <Levels/>
+                    <ProgressBar/>
+                    <h2>{this.state.question}</h2>
+    
+                    {displayOptions}
+    
+                    <button 
+                        disabled={this.state.btnDisabled} 
+                        className="btnSubmit"
+                        onClick={this.nextQuestion}
+                        >
+                            Suivant
+                        </button>
+                </>
+        )
         
-        return (
-            <div>
-                <Levels/>
-                <ProgressBar/>
-                <h2>{this.state.question}</h2>
-
-                {displayOptions}
-
-                <button 
-                    disabled={this.state.btnDisabled} 
-                    className="btnSubmit"
-                    onClick={this.nextQuestion}
-                    >
-                        Suivant
-                    </button>
-            </div>
-        );
     }
 };
 
