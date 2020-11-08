@@ -154,7 +154,9 @@ class Quiz extends Component {
         // const { pseudo } = this.props.userData;
 
         return this.state.quizEnd ? (
-            <QuizOver/>
+            <QuizOver
+                ref={this.storedDataRef}
+            />
         ) : (
                 <>
                     <Levels/>
