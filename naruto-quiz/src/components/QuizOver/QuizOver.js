@@ -7,7 +7,8 @@ const QuizOver = React.forwardRef((props, ref) => {
             score, 
             maxQuestions, 
             quizLevel, 
-            percent
+            percent,
+            loadLevelQuestions
         } = props;
 
     const [asked, setAsked] = useState([])
@@ -18,6 +19,13 @@ const QuizOver = React.forwardRef((props, ref) => {
     // Si on a la moyenne
     const averageGrade = maxQuestions / 2
 
+    if (score < averageGrade){
+        // Dans le cas où on veux faire recommencer le quiz
+        setTimeout(() => loadLevelQuestions(0), 3000);
+        // Dans le cas ou on veut faire recommencer le niveau dans lequel la personne ce trouve
+        // setTimeout(() => loadLevelQuestions(quizLevel), 3000);
+    }
+
     const decision = score >= averageGrade ? (
         <>
             <div className="stepsBtnContainer">
@@ -25,12 +33,22 @@ const QuizOver = React.forwardRef((props, ref) => {
                     quizLevel < levelNames.length ? (
                         <>
                             <p className="successMsg">Bravo, passez au niveau suivant !</p>
-                            <button className="btnResult success">Niveau suivant</button>
+                            <button 
+                                className="btnResult success"
+                                onClick={() => loadLevelQuestions(quizLevel)}
+                            >
+                                Niveau suivant
+                            </button>
                         </>
                     ) : (
                         <>
                             <p className="successMsg">Bravo vous êtes un expert</p>
-                            <button className="btnResult gameOver">Niveau suivant</button>
+                            <button 
+                                className="btnResult gameOver"
+                                onClick={() => loadLevelQuestions(0)}
+                            >
+                                Accueil
+                            </button>
                         </>
                     )
                 }
@@ -69,6 +87,7 @@ const QuizOver = React.forwardRef((props, ref) => {
     ) : (
         <tr>
             <td colSpan="3" > 
+            <div className="loader"></div>
                 <p style={{textAlign: 'center', color: 'red'}}>Pas de réponses !</p>
             </td>
         </tr>
