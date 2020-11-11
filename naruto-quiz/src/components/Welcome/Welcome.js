@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import Logout from '../Logout/Logout';
 import Quiz from '../Quiz/Quiz';
 import { FirebaseContext } from '../firebase/encapsule';
+import Loader from '../Loader/Loader'
 
 
 const Welcome = props => {
@@ -40,10 +41,10 @@ const Welcome = props => {
 
     // On vérifie si le state est rempli si non on met le loader et si oui on met le quiz
     return userSession === null ? (
-        <>
-            <div className="loader"></div>
-            <p className="loaderText">Loader ...</p>
-        </>
+        <Loader
+            loadingMsg={"Authentification..."}
+            styling={{textAlign: 'center', color: '#FFFFFF'}}
+        />
     ) : (
         <div className="quiz-bg">
             <div className="container">

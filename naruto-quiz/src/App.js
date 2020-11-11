@@ -9,22 +9,23 @@ import Signup from './components/Signup/Signup';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import ForgetPassword from './components/ForgetPassword/ForgetPassword'
 import './App.css';
+import { IconContext } from 'react-icons'
 
 function App() {
   return (
     <Router>
-
-      <Header/>
-        <Switch>
-          <Route  exact path="/" component={Landing}/>
-          <Route  path="/welcome" component={Welcome}/>
-          <Route  path="/login" component={Login}/>
-          <Route  path="/signup" component={Signup}/>
-          <Route  path="/forgetpassword" component={ForgetPassword}/>
-          <Route  component={ErrorPage}/>
-        </Switch>
-      <Footer/>
-
+      <IconContext.Provider value={{style: {verticalAlign: 'middle'}}}>
+        <Header/>
+          <Switch>
+            <Route  exact path="/" component={Landing}/>
+            <Route  path="/welcome" component={Welcome}/>
+            <Route  path="/login" component={Login}/>
+            <Route  path="/signup" component={Signup}/>
+            <Route  path="/forgetpassword" component={ForgetPassword}/>
+            <Route  component={ErrorPage}/>
+          </Switch>
+        <Footer/>
+      </IconContext.Provider>
     </Router>
   );
 }
