@@ -14,6 +14,9 @@ const QuizOver = React.forwardRef((props, ref) => {
             loadLevelQuestions
         } = props;
 
+    const API_PUBLIC_KEYS = process.env.REACT_APP_MARVEL_API_KEY;
+    const hash = 'e8e89ad47c2f554f9cf3cfcb3982adca';
+
     const [asked, setAsked] = useState([])
     const [openModal, setOpenModal] = useState(false)
 
