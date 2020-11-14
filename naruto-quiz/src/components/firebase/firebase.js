@@ -3,13 +3,13 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const config = {
-    apiKey: "AIzaSyD5A-ibwnNpLMtol7Ad2-3jDhilF9yOr40",
-    authDomain: "naruto-cb957.firebaseapp.com",
-    databaseURL: "https://naruto-cb957.firebaseio.com",
-    projectId: "naruto-cb957",
-    storageBucket: "naruto-cb957.appspot.com",
-    messagingSenderId: "461067245389",
-    appId: "1:461067245389:web:8f1ac9346277d0537e4904"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID
   };
 
 class Firebase {
